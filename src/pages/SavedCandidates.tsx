@@ -4,6 +4,7 @@ import CandidateCard from "../components/CandidateCard";
 
 const SavedCandidates = () => {
   const [saved, setSaved] = useState<GitHubUser[]>([]);
+  const [sortBy, setSortBy] = useState<"name" | "login" | "company">("name");
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("savedCandidates") || "[]");
@@ -24,10 +25,33 @@ const SavedCandidates = () => {
     );
   }
 
+  const sorted = [...saved].sort((a, b) => {
+    const aVal = (a[sortBy] || "").toLowerCase();
+    const bVal = (b[sortBy] || "").toLowerCase();
+    return aVal.localeCompare(bVal);
+  });
+
   return (
     <main role="main" aria-label="List of saved GitHub candidates">
       <h1>Potential Candidates</h1>
-      {saved.map((candidate) => (
+
+      <div className="nav-button-group" style={{ marginBottom: "1rem" }}>
+        <label htmlFor="sort" style={{ marginRight: "0.5rem" }}>
+          Sort by:
+        </label>
+        <select
+          id="sort"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value as "name" | "login" | "company")}
+          aria-label="Sort saved candidates by"
+        >
+          <option value="name">Name</option>
+          <option value="login">Username</option>
+          <option value="company">Company</option>
+        </select>
+      </div>
+
+      {sorted.map((candidate) => (
         <section
           key={candidate.login}
           aria-label={`Saved candidate ${candidate.name || candidate.login}`}
