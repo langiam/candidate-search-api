@@ -25,11 +25,15 @@ const SavedCandidates = () => {
     );
   }
 
-  const sorted = [...saved].sort((a, b) => {
-    const aVal = (a[sortBy] || "").toLowerCase();
-    const bVal = (b[sortBy] || "").toLowerCase();
-    return aVal.localeCompare(bVal);
-  });
+  const getSortValue = (user: GitHubUser) => {
+    const value = user[sortBy];
+    return typeof value === "string" ? value.toLowerCase() : "";
+  };
+  
+  const sorted = [...saved].sort((a, b) =>
+    getSortValue(a).localeCompare(getSortValue(b))
+  );
+  
 
   return (
     <main role="main" aria-label="List of saved GitHub candidates">
