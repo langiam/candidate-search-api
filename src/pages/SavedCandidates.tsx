@@ -11,23 +11,38 @@ const SavedCandidates = () => {
   }, []);
 
   const reject = (login: string) => {
-    const updated = saved.filter(c => c.login !== login);
+    const updated = saved.filter((c) => c.login !== login);
     setSaved(updated);
     localStorage.setItem("savedCandidates", JSON.stringify(updated));
   };
 
-  if (!saved.length) return <h2>No candidates have been accepted yet.</h2>;
+  if (!saved.length) {
+    return (
+      <section role="region" aria-label="Saved candidates list">
+        <h2>No candidates have been accepted yet.</h2>
+      </section>
+    );
+  }
 
   return (
-    <div>
+    <main role="main" aria-label="List of saved GitHub candidates">
       <h1>Potential Candidates</h1>
-      {saved.map(candidate => (
-        <div key={candidate.login}>
+      {saved.map((candidate) => (
+        <section
+          key={candidate.login}
+          aria-label={`Saved candidate ${candidate.name || candidate.login}`}
+        >
           <CandidateCard user={candidate} />
-          <button onClick={() => reject(candidate.login)}>Reject</button>
-        </div>
+          <button
+            onClick={() => reject(candidate.login)}
+            title="Remove candidate from saved list"
+            aria-label={`Reject candidate ${candidate.name || candidate.login}`}
+          >
+            Reject
+          </button>
+        </section>
       ))}
-    </div>
+    </main>
   );
 };
 

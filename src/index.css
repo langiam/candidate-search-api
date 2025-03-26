@@ -57,37 +57,38 @@ main {
   align-items: center;
 }
 
-nav {
+.nav {
   background-color: var(--color-highlight);
   padding: 1rem 2rem;
   display: flex;
   justify-content: flex-start;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.nav {
-  background-color: var(--color-highlight);
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.nav-button-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .nav-list {
+  list-style: none;
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
   margin: 0;
   padding: 0;
-  list-style: none;
 }
 
 .nav-link {
-  font-weight: 600;
   color: var(--color-text-dark);
+  font-weight: 600;
   text-decoration: none;
 }
 
-.nav-link:hover {
+.nav-link.active {
   text-decoration: underline;
-  color: var(--color-link-hover);
+  font-weight: 800;
 }
 
 .nav-item {
@@ -95,11 +96,8 @@ nav {
   margin-right: 1.5rem;
 }
 
-.nav-link {
-  color: var(--color-text-dark);
-  font-weight: 600;
-}
 .nav-link:hover {
+  text-decoration: underline;
   color: var(--color-link-hover);
 }
 .active {
@@ -119,12 +117,25 @@ button {
   transition: background-color 0.3s ease;
   margin: 0.5rem;
 }
+
 button:hover {
   background-color: var(--color-button-hover);
 }
+
 button:focus,
 button:focus-visible {
   outline: 3px auto var(--color-highlight);
+}
+
+button.restore {
+  background-color: var(--color-highlight);
+  color: var(--color-text-dark);
+  font-weight: 600;
+}
+
+button.restore:hover {
+  background-color: var(--color-accent);
+  color: white;
 }
 
 .candidate-card {
@@ -161,8 +172,32 @@ tbody tr:nth-child(odd) {
   border-collapse: collapse;
 }
 
+.table th {
+  background-color: var(--color-highlight);
+  color: var(--color-text-dark);
+  font-weight: 700;
+}
+
+.table,
+.table th,
+.table td {
+  border: 1px solid #ddd;
+}
+
 .table td,
 .table th {
   padding: 0.75rem 1rem;
   text-align: left;
+}
+
+@media (max-width: 768px) {
+  .table {
+    width: 95vw;
+    font-size: 0.9rem;
+  }
+
+  .candidate-card {
+    margin: 1rem;
+    padding: 1rem;
+  }
 }

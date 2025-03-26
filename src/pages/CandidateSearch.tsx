@@ -15,6 +15,7 @@ const CandidateSearch = () => {
     } else {
       setUser(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
 
   const fetchCandidate = async () => {
@@ -34,15 +35,34 @@ const CandidateSearch = () => {
     setIndex(index + 1);
   };
 
-  if (!user) return <h2>No more candidates available!</h2>;
+  if (!user) {
+    return <h2>No more candidates available!</h2>;
+  }
 
   return (
-    <div>
+    <main role="main" aria-label="Candidate Search Section">
       <h1>Candidate Search</h1>
+
       <CandidateCard user={user} />
-      <button onClick={rejectCandidate}>−</button>
-      <button onClick={acceptCandidate}>+</button>
-    </div>
+
+      <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+        <button
+          onClick={rejectCandidate}
+          title="Reject Candidate"
+          aria-label="Reject Candidate"
+        >
+          −
+        </button>
+
+        <button
+          onClick={acceptCandidate}
+          title="Add Candidate"
+          aria-label="Add Candidate"
+        >
+          +
+        </button>
+      </div>
+    </main>
   );
 };
 
