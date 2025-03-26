@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GitHubUser } from "../interfaces/GitHubUser";
+import { GitHubUser } from "../interfaces/Candidate.interface";
 
 const API_BASE = "https://api.github.com/users";
 
